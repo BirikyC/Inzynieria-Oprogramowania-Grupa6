@@ -411,6 +411,23 @@ app.put('/user/update/password', async (req, res) => {
   }
 });
 
+/**
+ * Zwraca pełną listę produktów znajdujących się w magazynie.
+ * 
+ * Endpoint służy administratorom do pobierania aktualnego stanu magazynowego.
+ * 
+ * Nie przyjmuje żadnych parametrów ani danych w ciele żądania.
+ * 
+ * Odpowiedź:
+ * Zwraca tablicę obiektów JSON zawierających dane z tabeli `stock_items`.
+ * Każdy obiekt zawiera m.in.:
+ * - item_id: number — identyfikator produktu
+ * - item_name: string — nazwa produktu
+ * - amount: number — ilość dostępna w magazynie
+ * - unit: string — jednostka miary (np. "kg", "szt.")
+ * 
+ * W przypadku błędu serwera zwraca kod 500 i komunikat o błędzie.
+ */
 app.get('/admin/stock/get', async (req, res) => {
   try{
     const result = await pool.query(`SELECT * FROM stock_items`);
