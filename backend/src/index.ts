@@ -436,8 +436,6 @@ app.get('/admin/stock/product/names', async (req, res) => {
 app.post('/admin/order/product', async (req, res) => {
   const { id, name, amount, unit, supplier_id } = req.body;
 
-    console.log(supplier_id)
-
   try{
     const result = await pool.query(`INSERT INTO "Order" (supplier_id, item_id, date, quantity, status) VALUES ($1, $2, CURRENT_DATE, $3, 'delivered')`,
       [supplier_id, id, amount]
